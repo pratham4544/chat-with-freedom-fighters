@@ -20,6 +20,9 @@ LANGCHAIN_ENDPOINT="https://api.smith.langchain.com"
 LANGCHAIN_API_KEY=os.environ['LANGCHAIN_API_KEY']
 LANGCHAIN_PROJECT="freedom"
 
+os.environ['LANGCHAIN_TRACING_V2'] = 'true'
+LANGCHAIN_API_KEY = os.getenv('LANGCHAIN_API_KEY')
+
 
 def get_prompt(person_name):
     variable_name = f"{person_name.lower()}"
