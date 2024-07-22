@@ -15,6 +15,12 @@ import streamlit as st
 # Load environment variables
 load_dotenv()
 
+LANGCHAIN_TRACING_V2='true'
+LANGCHAIN_ENDPOINT="https://api.smith.langchain.com"
+LANGCHAIN_API_KEY=os.environ['LANGCHAIN_API_KEY']
+LANGCHAIN_PROJECT="freedom"
+
+
 def get_prompt(person_name):
     variable_name = f"{person_name.lower()}"
     print(variable_name)
