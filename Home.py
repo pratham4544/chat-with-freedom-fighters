@@ -3,7 +3,7 @@ import streamlit as st
 # Title of the app
 st.title("Chat with Indian Freedom Fighters")
 
-st.image('assets/homepage.jpeg',use_column_width=True)
+st.image('assets/homepage.jpg',use_column_width=True)
 
 # Description
 st.write("""

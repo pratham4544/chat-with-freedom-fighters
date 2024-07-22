@@ -2,14 +2,19 @@ import streamlit as st
 
 # Sample data: List of dictionaries containing freedom fighter names and image URLs
 freedom_fighters = [
-    {"name": "Mahatma Gandhi", "image": "https://via.placeholder.com/150"},
-    {"name": "Bhagat Singh", "image": "https://via.placeholder.com/150"},
-    {"name": "Rani Lakshmi Bai", "image": "https://via.placeholder.com/150"},
-    {"name": "Subhas Chandra Bose", "image": "https://via.placeholder.com/150"},
-    {"name": "Sardar Vallabhbhai Patel", "image": "https://via.placeholder.com/150"},
-    {"name": "Jawaharlal Nehru", "image": "https://via.placeholder.com/150"},
-    {"name": "Bal Gangadhar Tilak", "image": "https://via.placeholder.com/150"},
-    {"name": "Chandra Shekhar Azad", "image": "https://via.placeholder.com/150"}
+    {"name": "Sawarkar", "image": f"assets/sawarkar.jpg"},
+    {"name": "Sardar Patel", "image": f"assets/patel.jpg"},
+    {"name": "Jawaharlal Nehru", "image": f"assets/Jnehru.jpg"},
+    {"name": "Bal Gangadhar Tilak", "image": f"assets/bal.png"},
+    {"name": "Bhagat Singh", "image": f"assets/bhagat.jpg"},
+    {"name": "Mahatma Gandhi", "image": f"assets/gandhi.jpg"},
+    {"name": "Netaji Bose", "image": f"assets/netaji.jpg"},
+    {"name": "Rani Laxmi Bai", "image": f"assets/Rani_of_jhansi.jpg"},
+    {"name": "Lal Bhadur Sharshtri", "image": f"assets/shashtri.jpg"},
+    # {"name": "Duryodhan", "image": f"assets/duryodhan.jpeg"},
+    # {"name": "Karna", "image": f"assets/karna.jpeg"},
+    # {"name": "Mahabharat", "image": f"assets/mahabharat.jpeg"}
+    
 ]
 
 def display_freedom_fighter(fighter, key):
