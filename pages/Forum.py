@@ -22,33 +22,41 @@ st.title("Forum")
 
 # Display existing questions and comments
 for idx, item in enumerate(st.session_state.forum_data):
-    question, comments, likes = item
-    st.subheader(f"Q{idx + 1}: {question}")
+    # Ensure item has all expected elements
+    if len(item) == 3:
+        question, username, comments = item
+        likes = 0
+    else:
+        question, username, comments, likes = item
+    
+    st.subheader(f"Q{idx + 1}: {question} (by {username})")
     st.write(f"Likes: {likes}")
     
     if st.button(f"Like Q{idx + 1}", key=f"like_{idx}"):
-        st.session_state.forum_data[idx][2] += 1
+        st.session_state.forum_data[idx][3] += 1
         save_forum_data(st.session_state.forum_data)
         st.experimental_rerun()
     
     for comment in comments:
-        st.write(f"- {comment}")
+        st.write(f"- {comment['username']}: {comment['text']}")
     
     with st.expander("Add a comment"):
+        comment_username = st.text_input(f"Your name (for Q{idx + 1})", key=f"comment_user_{idx}")
         new_comment = st.text_area(f"Comment on Q{idx + 1}", key=f"comment_{idx}")
         if st.button(f"Add Comment to Q{idx + 1}", key=f"add_comment_{idx}"):
-            if new_comment:
-                st.session_state.forum_data[idx][1].append(new_comment)
+            if new_comment and comment_username:
+                st.session_state.forum_data[idx][2].append({'username': comment_username, 'text': new_comment})
                 save_forum_data(st.session_state.forum_data)
                 st.experimental_rerun()
 
 # Allow users to post new questions
 with st.form(key='new_question_form'):
+    question_username = st.text_input("Your name")
     new_question = st.text_input("Ask a question")
     submit_button = st.form_submit_button("Post Question")
     if submit_button:
-        if new_question:
-            st.session_state.forum_data.append([new_question, [], 0])
+        if new_question and question_username:
+            st.session_state.forum_data.append([new_question, question_username, [], 0])
             save_forum_data(st.session_state.forum_data)
             st.experimental_rerun()
 
