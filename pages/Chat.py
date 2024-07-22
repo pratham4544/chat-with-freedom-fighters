@@ -1,6 +1,6 @@
 import streamlit as st
 from src.helper import *
-
+import os
 
 llm = ResponseLLM()
 
@@ -30,6 +30,14 @@ print(f'first word after split{name}')
 
 if st.button("Send"):
     if user_input:
+        
+
+        LANGCHAIN_TRACING_V2='true'
+        LANGCHAIN_ENDPOINT="https://api.smith.langchain.com"
+        LANGCHAIN_API_KEY=os.environ['LANGCHAIN_API_KEY']
+        LANGCHAIN_PROJECT="freedom"
+        
+        
         # st.session_state.messages.append(f"You: {user_input}")
         response = llm.response(user_input,name)
         st.write(response)
