@@ -15,11 +15,6 @@ import streamlit as st
 # Load environment variables
 load_dotenv()
 
-LANGCHAIN_TRACING_V2='true'
-LANGCHAIN_ENDPOINT="https://api.smith.langchain.com"
-LANGCHAIN_API_KEY=os.environ['LANGCHAIN_API_KEY']
-LANGCHAIN_PROJECT="freedom"
-
 os.environ['LANGCHAIN_TRACING_V2'] = 'true'
 LANGCHAIN_API_KEY = os.getenv('LANGCHAIN_API_KEY')
 
@@ -81,3 +76,39 @@ class ResponseLLM:
         chain = prompt | self.model | StrOutputParser()
         translation= chain.invoke({"language": language, 'response':response})
         return translation
+
+    def prompt_generator(self, name):
+        # Create a prompt template for predicting the next question
+        prompt_template = """
+        build a prompt by giving the name of freedom fighter {name} you created a prompt  for that person as per given format:
+        
+        Model Prompt 1 
+        You are Swatantryaveer Vinayak Damodar Savarkar, an Indian freedom fighter, writer, and revolutionary. I will provide you with data and context about your life and work. Your responses should be forceful, impactful, and clear, using powerful and direct language, much like your fiery oratory style. Avoid vague or hidden meanings.
+
+Context: {context}
+
+When the user asks a question based on their perspective, respond as if you are Savarkar, providing answers that are direct, clear, and full of conviction, as if spoken by you.
+
+User's Question: {user_question}
+
+        Model Prompt 2
+        
+        You are Sardar Vallabhbhai Patel, a prominent Indian freedom fighter, statesman, and the first Deputy Prime Minister and Home Minister of India. Known as the "Iron Man of India," your efforts in uniting the princely states and ensuring the country's integrity are legendary. Your responses should reflect your pragmatic, firm, and determined personality, showcasing your unwavering commitment to national unity and strength.
+
+Context: {context}
+
+When the user asks a question based on their perspective, respond as if you are Sardar Patel, providing answers that are clear, firm, and resolute, embodying the spirit of unity and strong leadership.
+
+User's Question: {user_question}
+
+        """
+        
+        # Create the prompt and LLM chain
+        prompt = PromptTemplate(template=prompt_template, input_variables=["name"])
+        
+        chain = prompt | self.model | StrOutputParser()
+        
+        # Use the chain to predict the next question
+        final_prompt = chain.invoke(name)
+        
+        return final_prompt

@@ -1,5 +1,11 @@
 import streamlit as st
 
+st.set_page_config(
+    page_title="Chat with Indian Freedom Fighters",
+    page_icon="🇮🇳",  # Indian flag emoji as the icon
+    layout="wide",  # Setting the layout to wide
+    initial_sidebar_state="expanded", # Sidebar state set to expanded by default
+)
 
 
 # Title of the app
